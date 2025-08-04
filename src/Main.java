@@ -18,7 +18,7 @@ public class NumberTotal {
                 try {
                     numbers[i] = Integer.parseInt(scanner.nextLine());
                     totalSum += numbers[i];
-                    validInput = true; // Break out of the loop if input is valid
+                    validInput = true; 
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input! Please enter a valid integer.");
                 }
