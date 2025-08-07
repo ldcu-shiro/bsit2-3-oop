@@ -9,12 +9,12 @@ public class Main {
         int passingCount = 0;
 
         System.out.println("STUDENT GRADE CALCULATOR");
-        System.out.println("========================");
+        System.out.println("");
 
 
         for (int i = 0; i < students.length; i++) {
             System.out.println("\nStudent " + (i + 1) + ":");
-            System.out.println("---------");
+            System.out.println("");
             students[i].displayInfo();
 
             double average = students[i].calculateAverage();
@@ -31,7 +31,7 @@ public class Main {
         }
 
 
-        System.out.println("\n========================");
+        System.out.println("\n");
         System.out.println("SUMMARY:");
         System.out.println("Total students: " + students.length);
         System.out.println("Students passing: " + passingCount);
