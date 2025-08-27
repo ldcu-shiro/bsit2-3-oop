@@ -1,44 +1,55 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+
 public class Main {
     public static void main(String[] args) {
-        // Display bank information using static variables
-        System.out.println("Bank Name: " + BankAccount.getBankName());
-        System.out.println("Interest Rate: " + (BankAccount.getInterestRate() * 100) + "%");
+        System.out.println("=== Social Media Post Manager ===");
+
+        // Create PostManager instance
+        PostManager manager = new PostManager();
+
+        // Test data as specified
+        String postTitle = "Java Programming Tips";
+        int likes = 150;
+        int comments = 75;
+        int shares = 25;
+
+        // Calculate engagement using varargs
+        int engagementScore = manager.calculateEngagement(likes, comments, shares);
+
+        // Get category rating
+        String category = manager.getCategoryRating(engagementScore);
+
+        // Display post stats using both overloaded methods
+        System.out.println("Post: " + postTitle);
+        System.out.println("Engagement Score: " + engagementScore);
+        System.out.println("Category: " + category);
         System.out.println();
 
-        // Create at least 3 bank accounts with different names and initial balances
-        BankAccount account1 = new BankAccount("John Doe", 1000.0);
-        BankAccount account2 = new BankAccount("Jane Smith", 2500.0);
-        BankAccount account3 = new BankAccount("Bob Johnson", 500.0);
+        // Test hashtags array to ArrayList conversion
+        String[] hashtagsArray = {"#java", "#coding", "#programming", "#java", "#tips"};
+        ArrayList<String> uniqueHashtags = manager.manageHashtags(hashtagsArray);
 
-        System.out.println();
-        System.out.println("=== Account Operations ===");
+        System.out.println("Unique Hashtags: " + uniqueHashtags);
 
-        // Demonstrate deposits and withdrawals
-        account1.deposit(500.0);
-        account2.withdraw(300.0);
+        // Test trending posts with collections
+        ArrayList<String> posts = new ArrayList<>();
+        posts.add("Advanced Java Tutorial");
+        posts.add("Spring Boot Guide");
+        posts.add("Basic Programming");
 
-        System.out.println();
-        System.out.println("=== Interest Calculation ===");
+        HashMap<String, Integer> postEngagement = new HashMap<>();
+        postEngagement.put("Advanced Java Tutorial", 750);
+        postEngagement.put("Spring Boot Guide", 600);
+        postEngagement.put("Basic Programming", 300);
 
+        LinkedList<String> trendingPosts = manager.findTrendingPosts(posts, postEngagement);
+        System.out.println("Trending Posts: " + trendingPosts);
 
-        System.out.println(account1.getAccountHolderName() + "'s interest: $" +
-                account1.calculateInterest());
-        System.out.println(account2.getAccountHolderName() + "'s interest: $" +
-                account2.calculateInterest());
-        System.out.println(account3.getAccountHolderName() + "'s interest: $" +
-                account3.calculateInterest());
-
-        System.out.println();
-
-
-        System.out.println("Total Accounts Created: " + BankAccount.getTotalAccounts());
-
-        System.out.println();
-        System.out.println("=== Account Details ===");
-
-
-        account1.displayAccountInfo();
-        account2.displayAccountInfo();
-        account3.displayAccountInfo();
+        // Test unique authors using varargs and HashSet
+        HashSet<String> uniqueAuthors = manager.getUniqueAuthors("Alice", "Bob", "Alice", "Charlie", "Bob");
+        System.out.println("Unique Authors: " + uniqueAuthors);
     }
 }
