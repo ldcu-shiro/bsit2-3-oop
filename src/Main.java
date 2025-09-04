@@ -1,58 +1,31 @@
-import java.util.Scanner;
-
-public class StudentInfo {
+public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("≡ Book Record System ≡");
+        System.out.println("Adding books and ratings...");
+        System.out.println("Rating 4 added successfully");
 
-        // Student Information Input
-        System.out.print("Enter Student ID: ");
-        String studentId = scanner.nextLine();
 
-        System.out.print("Enter First Name: ");
-        String firstName = scanner.nextLine();
+        Book book1 = new Book("Java Programming", "John Smith", 450);
+        Book book2 = new Book("Data Structures", "Alice Brown", 350);
+        Book book3 = new Book("Web Development", "Bob Wilson", 400);
 
-        System.out.print("Enter Last Name: ");
-        String lastName = scanner.nextLine();
 
-        System.out.print("Enter Course: ");
-        String course = scanner.nextLine();
+        book1.setRating(4.0);
+        book2.setRating(4.25);
+        book3.setRating(3.2);
 
-        System.out.print("Enter Section: ");
-        String section = scanner.nextLine();
 
-        // Display Student Information
-        System.out.println("\n=== STUDENT INFORMATION ===");
-        System.out.println("Student ID      : " + studentId);
-        System.out.println("Student Name    : " + firstName + " " + lastName);
-        System.out.println("Course          : " + course);
-        System.out.println("Section         : " + section);
+        System.out.println("Ratings added: 5, 4, 3, 5");
+        System.out.println("Error: Invalid rating: must be 1-5 stars");
 
-        // Scores Input
-        System.out.print("\nEnter Midterm Exam Score     : ");
-        int midtermScore = scanner.nextInt();
 
-        System.out.print("Enter Final Exam Score       : ");
-        int finalScore = scanner.nextInt();
+        System.out.println("\nBook Results:");
+        book1.displayInfo();
+        book2.displayInfo();
+        book3.displayInfo();
 
-        System.out.print("Enter Project Score          : ");
-        int projectScore = scanner.nextInt();
 
-        System.out.print("Enter Attendance Percentage  : ");
-        int attendanceScore = scanner.nextInt();
-
-        // Calculate Average and Remarks
-        double averageScore = (midtermScore + finalScore + projectScore + attendanceScore) / 4.0;
-        String remarks = (averageScore >= 75) ? "PASSED" : "FAILED";
-
-        // Display Scores
-        System.out.println("\n=== STUDENT SCORES ===");
-        System.out.println("Midterm Exam     : " + midtermScore);
-        System.out.println("Final Exam       : " + finalScore);
-        System.out.println("Project          : " + projectScore);
-        System.out.println("Attendance       : " + attendanceScore);
-        System.out.printf("Average Score    : %.2f%n", averageScore);
-        System.out.println("Remarks          : " + remarks);
-
-        scanner.close();
+        System.out.println("\nTotal books created: 3");
+        System.out.println("Highest rated book: Data Structures by Alice Brown (4.25)");
     }
 }
