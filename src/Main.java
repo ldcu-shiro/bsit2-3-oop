@@ -1,55 +1,33 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== Social Media Post Manager ===");
-
-        // Create PostManager instance
-        PostManager manager = new PostManager();
-
-        // Test data as specified
-        String postTitle = "Java Programming Tips";
-        int likes = 150;
-        int comments = 75;
-        int shares = 25;
-
-        // Calculate engagement using varargs
-        int engagementScore = manager.calculateEngagement(likes, comments, shares);
-
-        // Get category rating
-        String category = manager.getCategoryRating(engagementScore);
-
-        // Display post stats using both overloaded methods
-        System.out.println("Post: " + postTitle);
-        System.out.println("Engagement Score: " + engagementScore);
-        System.out.println("Category: " + category);
+        System.out.println("=== EMPLOYEE MANAGEMENT SYSTEM ===");
         System.out.println();
 
-        // Test hashtags array to ArrayList conversion
-        String[] hashtagsArray = {"#java", "#coding", "#programming", "#java", "#tips"};
-        ArrayList<String> uniqueHashtags = manager.manageHashtags(hashtagsArray);
+        // Create different types of employees
+        Manager manager = new Manager("Alice Smith", 2001, 80000, "Engineering", 15000, 8);
+        Developer developer = new Developer("Bob Johnson", 2002, 70000, "Engineering", "Java", 5);
+        Intern intern = new Intern("Charlie Brown", 2003, 30000, "Engineering", "Tech University", true);
 
-        System.out.println("Unique Hashtags: " + uniqueHashtags);
+        System.out.println();
 
-        // Test trending posts with collections
-        ArrayList<String> posts = new ArrayList<>();
-        posts.add("Advanced Java Tutorial");
-        posts.add("Spring Boot Guide");
-        posts.add("Basic Programming");
+        // Display manager details
+        manager.displayInfo();
+        manager.work();
+        System.out.println("Monthly Salary: $" + manager.calculateSalary());
 
-        HashMap<String, Integer> postEngagement = new HashMap<>();
-        postEngagement.put("Advanced Java Tutorial", 750);
-        postEngagement.put("Spring Boot Guide", 600);
-        postEngagement.put("Basic Programming", 300);
+        System.out.println();
 
-        LinkedList<String> trendingPosts = manager.findTrendingPosts(posts, postEngagement);
-        System.out.println("Trending Posts: " + trendingPosts);
+        // Display developer details
+        developer.displayInfo();
+        developer.work();
+        System.out.println("Monthly Salary: $" + developer.calculateSalary());
 
-        // Test unique authors using varargs and HashSet
-        HashSet<String> uniqueAuthors = manager.getUniqueAuthors("Alice", "Bob", "Alice", "Charlie", "Bob");
-        System.out.println("Unique Authors: " + uniqueAuthors);
+        System.out.println();
+
+        // Display intern details
+        intern.displayInfo();
+        intern.work();
+        System.out.println("Monthly Salary: $" + intern.calculateSalary());
     }
 }
+

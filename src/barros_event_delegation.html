@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <h1>Simple Calculator</h1>
+
+    <div class="calculator">
+        <input id="operand1" type="number" placeholder="Operand 1" />
+        <input id="operand2" type="number" placeholder="Operand 2" />
+        <input id="result" type="text" placeholder="Result" readonly />
+        
+        <div id="buttons">
+            <button>+</button>
+            <button>-</button>
+            <button>*</button>
+            <button>/</button>
+            <button>=</button>
+        </div>
+    </div>
+
+    <script>
+       
+        const buttonsDiv = document.getElementById('buttons');
+        const operand1 = document.getElementById('operand1');
+        const operand2 = document.getElementById('operand2');
+        const result = document.getElementById('result');
+        
+        let selectedOperator = '';
+        
+    
+        buttonsDiv.addEventListener('click', function(event) {
+           
+            console.log(event.target.textContent);
+
+            if (event.target.tagName === 'BUTTON') {
+                const buttonText = event.target.textContent;
+
+                if (buttonText === '=') {
+                    
+                    const num1 = parseFloat(operand1.value);
+                    const num2 = parseFloat(operand2.value);
+                    let calcResult = 0;
+
+                    if (selectedOperator === '+') {
+                        calcResult = num1 + num2;
+                    } else if (selectedOperator === '-') {
+                        calcResult = num1 - num2;
+                    } else if (selectedOperator === '*') {
+                        calcResult = num1 * num2;
+                    } else if (selectedOperator === '/') {
+                        calcResult = num1 / num2;
+                    }
+
+                    result.value = calcResult;
+                } else {
+                   
+                    selectedOperator = buttonText;
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

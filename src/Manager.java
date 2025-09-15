@@ -1,4 +1,28 @@
-package PACKAGE_NAME;
+public class Manager extends Employee {
+    private double bonus;
+    private int teamSize;
 
-public class Manager {
+    public Manager(String name, int employeeId, double baseSalary, String department, double bonus, int teamSize) {
+        super(name, employeeId, baseSalary, department);
+        this.bonus = bonus;
+        this.teamSize = teamSize;
+        System.out.println(name + " has been promoted to Manager");
+    }
+
+
+    public double calculateSalary() {
+        return baseSalary + bonus;
+    }
+
+
+    public void work() {
+        super.work();
+        System.out.println(name + " is managing a team of " + teamSize + " employees");
+    }
+
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Bonus: $" + bonus);
+        System.out.println("Team Size: " + teamSize + " employees");
+    }
 }
