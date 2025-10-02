@@ -1,58 +1,79 @@
-import java.util.Scanner;
-
-public class StudentInfo {
+public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        LibraryManager manager = new LibraryManager();
 
-        // Student Information Input
-        System.out.print("Enter Student ID: ");
-        String studentId = scanner.nextLine();
+        // Create items (2 books, 2 magazines, 2 DVDs)
+        Book book1 = new Book("B01", "Java Programming", "James Gosling", "978-0135166307", 850, "Programming");
+        Book book2 = new Book("B02", "Clean Code", "Robert C. Martin", "978-0132350884", 464, "Software Engineering");
 
-        System.out.print("Enter First Name: ");
-        String firstName = scanner.nextLine();
+        Magazine mag1 = new Magazine("M01", "Tech Today", "Editor Smith", 45, "September", true);
+        Magazine mag2 = new Magazine("M02", "Science Monthly", "Editor Jane", 12, "June", false);
 
-        System.out.print("Enter Last Name: ");
-        String lastName = scanner.nextLine();
+        DVD dvd1 = new DVD("D01", "The Matrix", "Wachowski Sisters", 136, "R", "Sci-Fi");
+        DVD dvd2 = new DVD("D02", "Finding Nemo", "Andrew Stanton", 100, "G", "Animation");
 
-        System.out.print("Enter Course: ");
-        String course = scanner.nextLine();
+        // Add to manager
+        manager.addItem(book1);
+        manager.addItem(book2);
+        manager.addItem(mag1);
+        manager.addItem(mag2);
+        manager.addItem(dvd1);
+        manager.addItem(dvd2);
 
-        System.out.print("Enter Section: ");
-        String section = scanner.nextLine();
+        // Create users
+        Student student = new Student("U01", "John Smith", "john@example.com", "S1001", "Computer Science");
+        Faculty faculty = new Faculty("U02", "Dr. Smith", "smith@example.edu", "Engineering", "Professor");
 
-        // Display Student Information
-        System.out.println("\n=== STUDENT INFORMATION ===");
-        System.out.println("Student ID      : " + studentId);
-        System.out.println("Student Name    : " + firstName + " " + lastName);
-        System.out.println("Course          : " + course);
-        System.out.println("Section         : " + section);
+        // Display all
+        System.out.println("=== Displaying All Items ===");
+        manager.displayAllItems();
+        System.out.println();
 
-        // Scores Input
-        System.out.print("\nEnter Midterm Exam Score     : ");
-        int midtermScore = scanner.nextInt();
+        // Borrow items
+        System.out.println("=== Testing Borrowing ===");
+        if (manager.borrowItem("B01", student.getName())) {
+            student.addBorrowedItem(book1);
+            System.out.println("Student " + student.getName() + " borrowed: " + book1.getItemInfo());
+        }
+        if (manager.borrowItem("D01", faculty.getName())) {
+            faculty.addBorrowedItem(dvd1);
+            System.out.println("Faculty " + faculty.getName() + " borrowed: " + dvd1.getItemInfo());
+        }
+        System.out.println();
 
-        System.out.print("Enter Final Exam Score       : ");
-        int finalScore = scanner.nextInt();
+        // Display available items
+        System.out.println("=== Displaying Available Items ===");
+        manager.displayAvailableItems();
+        System.out.println();
 
-        System.out.print("Enter Project Score          : ");
-        int projectScore = scanner.nextInt();
+        // Late fees test
+        System.out.println("=== Testing Late Fees ===");
+        System.out.println(book1.getItemInfo() + " - 5 days late: $" + String.format("%.2f", book1.calculateLateFee(5)));
+        System.out.println(dvd1.getItemInfo() + " - 3 days late: $" + String.format("%.2f", dvd1.calculateLateFee(3)));
+        System.out.println();
 
-        System.out.print("Enter Attendance Percentage  : ");
-        int attendanceScore = scanner.nextInt();
+        // User information
+        System.out.println("=== Testing User Information ===");
+        System.out.println("Student: " + student.getName() + " (" + student.getMajor() + ") - " + student.getBorrowedItemsCount() + " items borrowed");
+        student.displayBorrowedItems();
+        System.out.println("Faculty: " + faculty.getName() + " (" + faculty.getDepartment() + ") - " + faculty.getBorrowedItemsCount() + " items borrowed");
+        faculty.displayBorrowedItems();
+        System.out.println();
 
-        // Calculate Average and Remarks
-        double averageScore = (midtermScore + finalScore + projectScore + attendanceScore) / 4.0;
-        String remarks = (averageScore >= 75) ? "PASSED" : "FAILED";
+        // Return item
+        System.out.println("=== Returning Items ===");
+        if (manager.returnItem("B01")) {
+            student.removeBorrowedItem(book1);
+            System.out.println("Returned: " + book1.getItemInfo());
+        }
+        System.out.println();
 
-        // Display Scores
-        System.out.println("\n=== STUDENT SCORES ===");
-        System.out.println("Midterm Exam     : " + midtermScore);
-        System.out.println("Final Exam       : " + finalScore);
-        System.out.println("Project          : " + projectScore);
-        System.out.println("Attendance       : " + attendanceScore);
-        System.out.printf("Average Score    : %.2f%n", averageScore);
-        System.out.println("Remarks          : " + remarks);
+        // Final available items
+        System.out.println("=== Final Available Items ===");
+        manager.displayAvailableItems();
+        System.out.println();
 
-        scanner.close();
+        // Calculate total late fees for 3 days late across all items
+        System.out.println("Total late fees for 3 days (all items): $" + String.format("%.2f", manager.calculateTotalLateFees(3)));
     }
 }
